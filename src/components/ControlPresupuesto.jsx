@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import swal from "sweetalert";
 import 'react-circular-progressbar/dist/styles.css';
 
 export const ControlPresupuesto = ({ gastos, setGastos, presupuesto, setPresupuesto,setIsvalidPresupuesto }) => {
@@ -36,12 +37,31 @@ export const ControlPresupuesto = ({ gastos, setGastos, presupuesto, setPresupue
     }
 
     const handleResetApp = () => {
-        const resultado = confirm('¿Deseas Reiniciar Presupuestos y Gastos?')
-        if (resultado) {
+        // const resultado = confirm('¿Deseas Reiniciar Presupuestos y Gastos?')
+        swal({
+            title: "¿Estas seguro?",
+            text: "Se eliminaran todos tus resgistros ",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
             setGastos([])
             setPresupuesto(0)
             setIsvalidPresupuesto(false)
-        }
+              swal("Tus Registros se eliminaron correctamente!", {
+                icon: "success",
+              });
+            } else {
+              swal("Tus archivos estan a salvo!");
+            }
+          });
+        // if (resultado) {
+        //     setGastos([])
+        //     setPresupuesto(0)
+        //     setIsvalidPresupuesto(false)
+        // }
     }
 
     return (

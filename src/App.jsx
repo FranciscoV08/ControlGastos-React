@@ -77,10 +77,8 @@ function App() {
 
   useEffect(() => {
     if (filtro === '') {
-      console.log('No tiene nada')
+      return
     }else{
-      console.log('Filtrando...')
-
       const result = gastos.filter( gasto => gasto.categoria === filtro )
       setGastosFiltrados(result)
     }
